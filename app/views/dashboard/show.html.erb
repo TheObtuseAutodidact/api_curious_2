@@ -1,0 +1,65 @@
+<h2><%= image_tag current_user.image_url, class: "img-circle img-thumbnail" %>
+<%= current_user.name %></br></br></h2>
+<h3>Your Twitter Timeline</h3>
+
+<% current_user.my_timeline.each do |tweet| %>
+<div class="container container-border">
+  <div class="col-md-2">
+    <%= image_tag tweet.user.profile_image_url %>
+  </div>
+  <div class="col-md-8">
+
+  <ul>
+    <p><b><%= tweet.user.name %></b>  @<%= tweet.user.screen_name %> <%= distance_of_time_in_words(tweet.created_at, Time.now) %></p>
+    <li><%= auto_link(tweet.text) %></li>
+  </div>
+
+  </ul>
+</div>
+<% end %>
+
+<!--  to be moved -->
+
+<h3>Followers</h3>
+
+<% current_user.my_friends.each do |friend| %>
+  <div class="container container-border">
+    <div class="col-md-2">
+      <%= image_tag friend.profile_image_url %>
+    </div>
+    <div class="col-md-8">
+
+      <ul>
+        <p>
+          <b><%= friend.name %></b> @<%= friend.screen_name %></br>
+          <b>description:</b> <%= friend.description %></br>
+          <b>latest:</b> <%= friend.status.text %>
+        </p>
+      </ul>
+
+    </div>
+  </div>
+  <% end %>
+
+  <!-- to be moved -->
+
+  <h3>Friends</h3>
+
+  <% current_user.my_followers.each do |follower| %>
+    <div class="container container-border">
+      <div class="col-md-2">
+        <%= image_tag follower.profile_image_url %>
+      </div>
+      <div class="col-md-8">
+
+        <ul>
+          <p>
+            <b><%= follower.name %></b> @<%= follower.screen_name %></br>
+            <b>description:</b> <%= follower.description %></br>
+            <b>latest:</b> <%= follower.status.text %>
+          </p>
+        </ul>
+
+      </div>
+    </div>
+    <% end %>
