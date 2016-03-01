@@ -15,6 +15,10 @@ class User < ActiveRecord::Base
     @user
   end
 
+  def total_tweets
+    twitter_client.user.statuses_count
+  end
+
   def my_friends
     twitter_client.friends.to_a
   end

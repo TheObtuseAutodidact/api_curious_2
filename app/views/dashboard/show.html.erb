@@ -1,7 +1,14 @@
+<div>
 <h2><%= image_tag current_user.image_url, class: "img-circle img-thumbnail" %>
-<%= current_user.name %></br></br></h2>
-<h3>Your Twitter Timeline</h3>
+<%= current_user.name %></br></h2>
+</div>
+<!-- to be moved -->
+<div class="container text-center">
 
+  <p>followers: <%= current_user.my_followers.count %> | friends: <%= current_user.my_friends.count %> | tweets: <%= current_user.total_tweets %>
+</div>
+
+<h3>Your Twitter Timeline</h3>
 <% current_user.my_timeline.each do |tweet| %>
 <div class="container container-border">
   <div class="col-md-2">
