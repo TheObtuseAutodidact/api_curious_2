@@ -15,6 +15,10 @@ class User < ActiveRecord::Base
     @user
   end
 
+  def post_tweet(tweet)
+    twitter_client.update(tweet)
+  end
+
   def total_tweets
     twitter_client.user.statuses_count
   end

@@ -1,13 +1,24 @@
-<div>
+<div class="container" id="profile">
 <h2><%= image_tag current_user.image_url, class: "img-circle img-thumbnail" %>
 <%= current_user.name %></br></h2>
 </div>
+
+<div class="send-tweet">   <!-- can i save form content to var and call method on var upon submmit? -->
+  <%= form_for(current_user, url: tweet_path) do |f| %>
+    <%= f.label_tag(:tweet, "tweet:") %>
+    <%= f.text_field_tag(:tweet) %>
+    <%= f.submit_tag("tweet-a-leet")  %>
+  <% end %>
+</div>
+
 <!-- to be moved -->
+
 <div class="container text-center">
 
   <p>followers: <%= current_user.my_followers.count %> | friends: <%= current_user.my_friends.count %> | tweets: <%= current_user.total_tweets %>
 </div>
 
+<div id="timeline" >
 <h3>Your Twitter Timeline</h3>
 <% current_user.my_timeline.each do |tweet| %>
 <div class="container container-border">
@@ -24,9 +35,11 @@
   </ul>
 </div>
 <% end %>
+</div>
 
 <!--  to be moved -->
 
+<div id="followers-div">
 <h3>Followers</h3>
 
 <% current_user.my_friends.each do |friend| %>
@@ -47,9 +60,11 @@
     </div>
   </div>
   <% end %>
+</div>
 
   <!-- to be moved -->
 
+<div id="friends-div">
   <h3>Friends</h3>
 
   <% current_user.my_followers.each do |follower| %>
@@ -70,3 +85,4 @@
       </div>
     </div>
     <% end %>
+</div>
