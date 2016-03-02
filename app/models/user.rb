@@ -15,37 +15,53 @@ class User < ActiveRecord::Base
     @user
   end
 
+  def favorite_tweets
+    @favorite_tweets ||= twitter_client.favorites
+  end
+
+  def favorite_tweet(tweet_id)
+    twitter_client.favorite(tweet_id)
+  end
+
   def post_tweet(tweet)
     twitter_client.update(tweet)
   end
 
   def total_tweets
-    twitter_client.user.statuses_count
+    @total_tweets ||= twitter_client.user.statuses_count
   end
 
   def my_friends
-    twitter_client.friends.to_a
+    @my_friends ||= twitter_client.friends.to_a
+    #
+    # true || false
+    # false || true
+    # "hello" || true
+    # nil || true
+    # "" || true
+    # User.new || "hello"
   end
 
   def my_followers
-    twitter_client.followers.to_a
+    @my_followers ||= twitter_client.followers.to_a
   end
 
   def my_timeline
-    twitter_client.home_timeline
+    @my_timeline ||= twitter_client.home_timeline
   end
 
   def user_timeline(user)
     twitter_client.user_timeline(user)
   end
 
+  private
 
   def service
-    @service = TwitterService.new(self)
+    TwitterService.new(self)
   end
 
   def twitter_client
-    service.client
+    @twitter_client ||= service.client
   end
 
 

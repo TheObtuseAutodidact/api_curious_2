@@ -6,7 +6,9 @@ Rails.application.routes.draw do
 
   delete '/logout', to: "sessions#destroy"
 
-  patch "tweet", to: "users#update"
+  patch "tweet", to: "users#update"  # why not post?
+
+  post "favorite", to: "users#favorite"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

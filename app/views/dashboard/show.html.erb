@@ -30,9 +30,15 @@
   <ul>
     <p><b><%= tweet.user.name %></b>  @<%= tweet.user.screen_name %> <%= distance_of_time_in_words(tweet.created_at, Time.now) %></p>
     <li><%= auto_link(tweet.text) %></li>
+    <% if current_user.favorite_tweets.include?(tweet) %>
+      <li><span class="glyphicon glyphicon-heart"></span></li>
+    <% else %>
+        <li><%= link_to "Favorite?", favorite_path(tweet.id), method: :post %></li>
+    <% end %>
   </div>
 
   </ul>
+
 </div>
 <% end %>
 </div>
